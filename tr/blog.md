@@ -7,7 +7,7 @@ layout: default
 
 |    Yazılım                            | Yayınlanma Zamanı  |
 |:--------------------------------------|:-------------------|
-| [C Dilini Python İcinde Kullanma](./2020-08-16-c-dilini-python-icinde-kullanma)         | 2020-08-16         |
+| [C Dilini Python İcinde Kullanma](/2020-08-16-c-dilini-python-icinde-kullanma)         | 2020-08-16         |
 | [Configparser Modülü ve Kullanimi](./2020-08-16-configparser-modulu-ve-kullanimi)       | 2020-08-16         |
 | [Dbus Servisleri Yönetin](./2020-08-16-dbus-servisleri-yonetin)                         | 2020-08-16         |
 | [Gtk ve Sinyal İslemleri (python3)](./2020-08-16-gtk-ve-sinyal-islemleri)                         | 2020-08-16         |
