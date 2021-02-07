@@ -1,0 +1,43 @@
+I"><p>Merhabalar,bu bölümde C ile yazılan fonksiyonları Pythonda nasıl kullanacağımızı incleyeceğiz. İlk olarak c dili ile bir şeyler yazalım.</p>
+
+<p>hesap.c</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">toplama</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">cikar</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Daha sonra aynı dizinde terminal veya cmd açın.Ben linux kullandıgım için terminalden anlatacağım.</p>
+
+<p>Ve terminal veya cmd de aşagıdaki komutları verin:</p>
+
+<p>Windows için:</p>
+
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">gcc</span> <span class="nt">-shared</span> <span class="nt">-Wl</span><span class="o">,</span><span class="nt">-soname</span><span class="o">,</span><span class="nt">adder</span> <span class="nt">-o</span> <span class="nt">hesapPaket</span><span class="nc">.dll</span> <span class="nt">-fPIC</span> <span class="nt">hesap</span><span class="nc">.c</span></code></pre></figure>
+
+<p>Linux için:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">Wl</span><span class="p">,</span><span class="o">-</span><span class="n">soname</span><span class="p">,</span><span class="n">adder</span> <span class="o">-</span><span class="n">o</span> <span class="n">hesapPaket</span><span class="p">.</span><span class="n">so</span> <span class="o">-</span><span class="n">fPIC</span> <span class="n">hesap</span><span class="p">.</span><span class="n">c</span></code></pre></figure>
+
+<p>Farkettiyseniz bulunduğumuz dizinde yeni bir dosya oluştu.Linux’da .so, windowsda .dll dir bu dosyanın uzantısı.Konumuza devam edelim.Gelin şimdi ise bu yeni oluşan dosyayı python scriptimizde nasıl kullanacağımızı görelim.Öyleyse aynı dizinde deneme.py adlı dosya oluşturalım ve şunları yazalım:</p>
+
+<p>deneme.py</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="n">cdll</span>
+<span class="n">hesapPartikulu</span> <span class="o">=</span> <span class="n">cdll</span><span class="p">.</span><span class="n">LoadLibrary</span><span class="p">(</span><span class="s">"./hesapPaket.so"</span><span class="p">)</span> <span class="c1">#Eger cdll.LoadLibrary("hesapPaket.so") yazarsanız hata alırsınız
+#bu arada eğer windows kullanıyorsanız hemen yukarıdaki kodu hemen aşagıdaki gibi değiştirin.
+#hesapPartikulu = cdll.LoadLibrary("./hesapPaket.dll")
+</span><span class="k">print</span><span class="p">(</span><span class="n">hesapPartikulu</span><span class="p">.</span><span class="n">toplama</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hesapPartikulu</span><span class="p">.</span><span class="n">cikar</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span></code></pre></figure>
+
+<p>Kutlarım,tebrikler,python içinde c kullandınız :)</p>
+
+<p>Sonraki yazılarda görüşmek üzere …</p>
+
+<p><a href="../">&lt;– geri</a></p>
+:ET

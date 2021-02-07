@@ -1,0 +1,115 @@
+I"�'<p>Merhabalar, bu bölümde json modülünü şöyle bir inceleyeceğiz.</p>
+
+<h3 id="bir-karakter-dizisini-dictsözlük-ve-listliste-ye-dönüştürmek">Bir Karakter Dizisini Dict(Sözlük) ve List(Liste) ye Dönüştürmek</h3>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="s">"""
+{
+	"içecek" : "Ayran",
+	"yemek" : "Kebab",
+	"Garnitür": "Çoban salatası"
+}
+"""</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+<span class="n">besinSozlugu</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">besinSozlugu</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">besinSozlugu</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">"--&gt; "</span><span class="p">,</span> <span class="n">besinSozlugu</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="s">"""
+[
+	"elma",
+	"ayva",
+	"kiraz"
+]
+"""</span> 
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="n">meyveListesi</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">meyveListesi</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">meyveListesi</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span></code></pre></figure>
+
+<h3 id="bir-dictsözlük-veya-listliste-i-stringkarakter-dizisi-e-dönüştürmek">Bir Dict(Sözlük) veya List(Liste) i String(Karakter Dizisi) e Dönüştürmek</h3>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"içecek"</span> <span class="p">:</span> <span class="s">"Ayran"</span><span class="p">,</span>
+	<span class="s">"yemek"</span> <span class="p">:</span> <span class="s">"Kebab"</span><span class="p">,</span>
+	<span class="s">"Garnitür"</span><span class="p">:</span> <span class="s">"Çoban salatası"</span>
+<span class="p">}</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+<span class="n">besinSozlugununStringHali</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">besinSozlugununStringHali</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">besinSozlugununStringHali</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span>
+	<span class="s">"elma"</span><span class="p">,</span>
+	<span class="s">"ayva"</span><span class="p">,</span>
+	<span class="s">"kiraz"</span>
+<span class="p">]</span>
+ 
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="n">meyveListesininStringHali</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">meyveListesininStringHali</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">meyveListesininStringHali</span><span class="p">)</span></code></pre></figure>
+
+<h3 id="json-uzantılı-dosyaları-kodlarımda-nasıl-kullanabilirim">.json Uzantılı Dosyaları Kodlarımda Nasıl Kullanabilirim?</h3>
+
+<p>Önce deneme.json adlı bir dosya oluşturup bu dosyaya aşagıdakileri yazalım.</p>
+
+<p>deneme.json</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">{</span>
+	<span class="s">"içecek"</span> <span class="p">:</span> <span class="s">"Ayran"</span><span class="p">,</span>
+	<span class="s">"yemek"</span> <span class="p">:</span> <span class="s">"Kebab"</span><span class="p">,</span>
+	<span class="s">"Garnitür"</span><span class="p">:</span> <span class="s">"Çoban salatası"</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Sonra aynı dizinde denemeJson.py adlı dosya oluşturup şunları yazalım.</p>
+
+<p>denemeJson.py</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"deneme.json"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">alinanVeri</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">eldeEdilenVeri</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">alinanVeri</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">eldeEdilenVeri</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">"---&gt; "</span><span class="p">,</span> <span class="n">eldeEdilenVeri</span><span class="p">)</span></code></pre></figure>
+
+<p>Gelin Alıştırma Olarak Girdiğiniz Verileri Kaydedip Gösteren Bir Fonksiyon Yazalım</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="s">"settings.json"</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"settings.json"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"settings.json dosyasını bulamadık.Bu yüzden yenisini oluşturuyorum."</span><span class="p">)</span>
+        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"{}"</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"deneme.json"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">alinan_veri</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">ayarlariEldeEt</span><span class="p">(</span><span class="n">veri</span><span class="p">):</span>
+    <span class="n">eldeEdilenVeri</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">veri</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">eldeEdilenVeri</span>
+
+<span class="k">def</span> <span class="nf">ayarlariDegistir</span><span class="p">(</span><span class="n">veri</span><span class="p">,</span> <span class="n">ayarBolumu</span><span class="p">,</span> <span class="n">yeniDeger</span><span class="p">):</span>
+    <span class="n">eldeEdilen</span> <span class="o">=</span> <span class="n">ayarlariEldeEt</span><span class="p">(</span><span class="n">veri</span><span class="p">)</span>
+    <span class="n">eldeEdilen</span><span class="p">[</span><span class="n">ayarBolumu</span><span class="p">]</span> <span class="o">=</span> <span class="n">yeniDeger</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"settings.json"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">kaydedilecekVeri</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">eldeEdilen</span><span class="p">)</span>
+        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">kaydedilecekVeri</span><span class="p">)</span></code></pre></figure>
+
+<p>Sonraki yazılarda görüşmek üzere …</p>
+
+<p><a href="../">&lt;– geri</a></p>
+:ET

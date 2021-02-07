@@ -1,0 +1,73 @@
+I"�
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Yazılım</th>
+      <th style="text-align: left">Yayınlanma Zamanı</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="/blog/2020-08-16-c-dilini-python-icinde-kullanma">C Dilini Python İcinde Kullanma</a></td>
+      <td style="text-align: left">2020-08-16</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/blog/2020-08-16-configparser-modulu-ve-kullanimi">Configparser Modülü ve Kullanimi</a></td>
+      <td style="text-align: left">2020-08-16</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/blog/2020-08-16-dbus-servisleri-yonetin">Dbus Servisleri Yönetin</a></td>
+      <td style="text-align: left">2020-08-16</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/blog/2020-08-16-gtk-ve-sinyal-islemleri">Gtk ve Sinyal İslemleri (python3)</a></td>
+      <td style="text-align: left">2020-08-16</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/blog/2020-08-16-json-modulu-ve-kullanimi">Json Modülü Ve Kullanımı</a></td>
+      <td style="text-align: left">2020-08-16</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/blog/2020-08-16-linuxda-usb-giris-cikisini-anlama">Linuxda Usb Giriş Çıkışını Anlama (python3)</a></td>
+      <td style="text-align: left">2020-08-16</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/blog/2020-08-16-pyqt-sinyal-islemleri">Pyqt5 Sinyal İşlemleri</a></td>
+      <td style="text-align: left">2020-08-16</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Yazılar</th>
+      <th style="text-align: left">Yayınlanma Zamanı</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="/blog/2020-08-16-frankfurt-seyahatnamesinden-mini-kesitler">Frankfurt Seyahatnamesi’nden Mini Kesitler</a></td>
+      <td style="text-align: left">2020-08-16</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/blog/2020-08-16-iki-basamakli-sayilarin-karesini-alma">İki Basamaklı Sayıların Karesini Alma</a></td>
+      <td style="text-align: left">2020-08-16</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/blog/2020-08-16-insanlik-modernizm-karsisinda">insanlık Modernizm Karşısında</a></td>
+      <td style="text-align: left">2020-08-16</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><a href="/blog/2020-08-16-paris-seyahatnamesinden-mini-kesitler">Paris Seyahatnamesi’nden Mini Kesitler</a></td>
+      <td style="text-align: left">2020-08-16</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+:ET

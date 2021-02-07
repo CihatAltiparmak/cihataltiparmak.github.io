@@ -1,0 +1,101 @@
+I"�!<p>Merhabalar, bu bölümde configparser ile cfg, ini dosyaları oluşturacağız.</p>
+
+<h3 id="configparser-i̇le-cfg-veya-ini-dosyalarından-veri-okuma">configparser İle .cfg Veya .ini Dosyalarından Veri Okuma</h3>
+
+<p>İlk olarak denemeConfig.py adlı dosya oluşturalım ve içine şunları yazalım.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span></code></pre></figure>
+
+<p>diyerek ConfigParser sınıfımızı örnekledik.Şimdi sıra dosyadan veri okumada.Ama önce aynı dizinde deneme.cfg adlı bir dosya daha oluşturalım.</p>
+
+<p>deneme.cfg</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">elma</span><span class="p">]</span>
+<span class="n">fiyat</span><span class="o">=</span> <span class="mi">7</span>
+<span class="n">kalite</span><span class="o">=</span><span class="n">Niğde</span> <span class="n">elması</span> <span class="n">kalitesinde</span><span class="p">,</span><span class="n">yani</span> <span class="n">muhteşem</span>
+<span class="n">ömür</span><span class="o">=</span><span class="s">"1 hafta"</span>
+
+<span class="p">[</span><span class="n">incir</span><span class="p">]</span>
+<span class="n">fiyat</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">kalite</span><span class="o">=</span><span class="n">on</span> <span class="n">numara</span> <span class="mi">4</span> <span class="n">yıldız</span>
+<span class="n">ömür</span><span class="o">=</span><span class="mi">3</span> <span class="n">gün</span></code></pre></figure>
+
+<p>Şimdi ise bu dosyadaki bilgilere erişelim.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+<span class="n">c</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="s">"deneme.cfg"</span><span class="p">)</span></code></pre></figure>
+
+<p>Şimdi ise verilere erişelim.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+<span class="n">c</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="s">"deneme.cfg"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"elma yi tanıyalım..."</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s">"elma"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s">"elma"</span><span class="p">][</span><span class="s">"fiyat"</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="s">"elma"</span><span class="p">][</span><span class="s">"kalite"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"------------"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"inciri tanıyalım"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s">"incir"</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s">"incir"</span><span class="p">][</span><span class="s">"fiyat"</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="s">"incir"</span><span class="p">][</span><span class="s">"kalite"</span><span class="p">])</span></code></pre></figure>
+
+<h3 id="configparser-i̇le-cfg-veya-ini-dosyalarına-veri-yazma">configparser İle .cfg Veya .ini Dosyalarına Veri Yazma</h3>
+
+<p>İlk olarak denemeConfig.py adlı dosya oluşturalım ve içine şunları yazalım.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">					
+<span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span></code></pre></figure>
+
+<p>diyerek ConfigParser sınıfımızı örnekledik.Şimdi sıra dosyadan veri yazmada.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+<span class="n">c</span><span class="p">[</span><span class="s">"AYARLAR"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"parlaklık"</span> <span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+	<span class="s">"ses düzeyi"</span> <span class="p">:</span> <span class="mi">130</span><span class="p">,</span>
+	<span class="s">"durum"</span> <span class="p">:</span> <span class="bp">False</span>
+<span class="p">}</span>
+
+<span class="n">c</span><span class="p">[</span><span class="s">"OYUN SECENEKLERİ"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"fare yönü"</span> <span class="p">:</span> <span class="s">"sağ"</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Şimdi ise bu verileri bir dosyaya kaydedelim.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+<span class="n">c</span><span class="p">[</span><span class="s">"AYARLAR"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"parlaklık"</span> <span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+	<span class="s">"ses düzeyi"</span> <span class="p">:</span> <span class="mi">130</span><span class="p">,</span>
+	<span class="s">"durum"</span> <span class="p">:</span> <span class="bp">False</span>
+<span class="p">}</span>
+
+<span class="n">c</span><span class="p">[</span><span class="s">"OYUN SECENEKLERİ"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"fare yönü"</span> <span class="p">:</span> <span class="s">"sağ"</span>
+<span class="p">}</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"deneme.cfg"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+	<span class="n">c</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></code></pre></figure>
+
+<p>Dizinde oluşan deneme.cfg adlı dosyayı açtığınızda şunları göreceksiniz:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[</span><span class="n">AYARLAR</span><span class="p">]</span>
+<span class="n">parlaklık</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">ses</span> <span class="n">düzeyi</span> <span class="o">=</span> <span class="mi">130</span>
+<span class="n">durum</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="p">[</span><span class="n">OYUN</span> <span class="n">SECENEKLERİ</span><span class="p">]</span>
+<span class="n">fare</span> <span class="n">yönü</span> <span class="o">=</span> <span class="n">sağ</span></code></pre></figure>
+
+<p>Sonraki yazılarda görüşmek üzere …</p>
+
+<p><a href="../">&lt;– geri</a></p>
+:ET

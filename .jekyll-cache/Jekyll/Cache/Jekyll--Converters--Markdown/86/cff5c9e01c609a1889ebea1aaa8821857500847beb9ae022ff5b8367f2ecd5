@@ -1,0 +1,160 @@
+I"�i<h3 id="dbus-i̇le-gi̇ren-usb-bellekleri̇-tespi̇t-etme">DBUS İLE GİREN USB BELLEKLERİ TESPİT ETME</h3>
+
+<p>Yukarıdaki yazılardan dbus ın matığını az çok anladınız.</p>
+
+<p>Ben ilk olarak kodları vereyim.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">dbus</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s">"getAllUnixDevices"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">getAllUnixDevices</span><span class="p">():</span>
+    <span class="n">busSession</span> <span class="o">=</span> <span class="n">dbus</span><span class="p">.</span><span class="n">SessionBus</span><span class="p">()</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">busSession</span><span class="p">.</span><span class="n">get_object</span><span class="p">(</span><span class="s">"org.gtk.vfs.UDisks2VolumeMonitor"</span><span class="p">,</span> <span class="s">"/org/gtk/Private/RemoteVolumeMonitor"</span><span class="p">)</span>
+    <span class="n">iface</span> <span class="o">=</span> <span class="n">dbus</span><span class="p">.</span><span class="n">Interface</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s">"org.gtk.Private.RemoteVolumeMonitor"</span><span class="p">)</span>
+    <span class="n">_listdevice_</span> <span class="o">=</span> <span class="n">iface</span><span class="p">.</span><span class="n">List</span><span class="p">()</span>
+    <span class="n">devices</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_listdevice_</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">dbus</span><span class="p">.</span><span class="n">Dictionary</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1">#FIXME How do is select USB devices better without third party?
+</span>                    
+                    <span class="n">path</span> <span class="o">=</span> <span class="n">deviceList</span><span class="p">(</span><span class="s">"/org/freedesktop/UDisks2/block_devices/"</span><span class="o">+</span><span class="n">j</span><span class="p">[</span><span class="s">"unix-device"</span><span class="p">].</span><span class="n">lstrip</span><span class="p">(</span><span class="s">"/dev/"</span><span class="p">))</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">findUSBDevices</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                        <span class="n">size</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"Size"</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">12</span><span class="p">:</span>
+                            <span class="n">size</span> <span class="o">=</span> <span class="s">"%.0fTB"</span> <span class="o">%</span> <span class="nb">round</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">10</span><span class="o">**</span><span class="mi">12</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span><span class="p">:</span>
+                            <span class="n">size</span> <span class="o">=</span> <span class="s">"%.0fGB"</span> <span class="o">%</span> <span class="nb">round</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">:</span>
+                            <span class="n">size</span> <span class="o">=</span> <span class="s">"%.0fMB"</span> <span class="o">%</span> <span class="nb">round</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">:</span>
+                            <span class="n">size</span> <span class="o">=</span> <span class="s">"%.0fkB"</span> <span class="o">%</span> <span class="nb">round</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">size</span> <span class="o">=</span> <span class="s">"%.0fB"</span> <span class="o">%</span> <span class="nb">round</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+                        <span class="n">devices</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"Vendor"</span><span class="p">))</span><span class="o">+</span><span class="s">" "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"Model"</span><span class="p">))</span><span class="o">+</span><span class="s">" "</span><span class="o">+</span><span class="n">size</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="s">"unix-device"</span><span class="p">]),</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"Size"</span><span class="p">)])</span>
+                        
+                <span class="k">except</span> <span class="nb">KeyError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">devices</span>
+        
+    
+<span class="k">def</span> <span class="nf">deviceList</span><span class="p">(</span><span class="n">objectPath</span><span class="p">):</span>
+    <span class="n">busSys</span> <span class="o">=</span> <span class="n">dbus</span><span class="p">.</span><span class="n">SystemBus</span><span class="p">()</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">busSys</span><span class="p">.</span><span class="n">get_object</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2"</span><span class="p">,</span> <span class="n">objectPath</span><span class="p">)</span>
+    <span class="n">iface</span> <span class="o">=</span> <span class="n">dbus</span><span class="p">.</span><span class="n">Interface</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s">"org.freedesktop.DBus.Properties"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">iface</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Block"</span><span class="p">,</span> <span class="s">"Drive"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">findUSBDevices</span><span class="p">(</span><span class="n">objectPath</span><span class="p">):</span>
+    <span class="n">busSys</span> <span class="o">=</span> <span class="n">dbus</span><span class="p">.</span><span class="n">SystemBus</span><span class="p">()</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">busSys</span><span class="p">.</span><span class="n">get_object</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2"</span><span class="p">,</span> <span class="n">objectPath</span><span class="p">)</span>
+    <span class="n">iface</span> <span class="o">=</span> <span class="n">dbus</span><span class="p">.</span><span class="n">Interface</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s">"org.freedesktop.DBus.Properties"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">iface</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"ConnectionBus"</span><span class="p">)</span> <span class="o">==</span> <span class="s">"usb"</span><span class="p">,</span> <span class="n">iface</span><span class="p">)</span>
+
+<span class="n">getAllUnixDevices</span><span class="p">()</span></code></pre></figure>
+
+<p>Asıl işi görecek olan getAllUnixDevices olacak.İlk olarak getAllUnixDevices çalışır bu kodda. Bu kodlardaki deviceList fonksiyonu bize usb olsun olmasın hardiskinden tut CD sine usb sine kadar bütün device ları elde eder(bütün device ları bir anda listelemez,Sadece findUSBDevices fonksiyonuna daha kolay parametre vermek için yazdım o fonksiyonu). findUSBDevices fonksiyonu, adı üstünde, deviceList fonksiyonundan elde edilen verileri kullanarak bize tuple veri tipi döner.tuple ın 1. değeri usb ise True, değilse False değeri alır.tuple ın 2. değeri parametre olarak verilen değerdir.Ama işimiz daha bitmemiştir.Bir de kullanıcıya bunu uygun formatta göstermek gerekiyor.Onu da getAllUnixDevices foksiyonu içinde zaten yapıyorum.</p>
+
+<p>Öyleyse ilk inceleyeceğimiz kod parçası, aşağıda</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[...]</span>
+<span class="k">def</span> <span class="nf">getAllUnixDevices</span><span class="p">():</span>
+    <span class="n">busSession</span> <span class="o">=</span> <span class="n">dbus</span><span class="p">.</span><span class="n">SessionBus</span><span class="p">()</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">busSession</span><span class="p">.</span><span class="n">get_object</span><span class="p">(</span><span class="s">"org.gtk.vfs.UDisks2VolumeMonitor"</span><span class="p">,</span> <span class="s">"/org/gtk/Private/RemoteVolumeMonitor"</span><span class="p">)</span>
+    <span class="n">iface</span> <span class="o">=</span> <span class="n">dbus</span><span class="p">.</span><span class="n">Interface</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s">"org.gtk.Private.RemoteVolumeMonitor"</span><span class="p">)</span>
+    <span class="n">_listdevice_</span> <span class="o">=</span> <span class="n">iface</span><span class="p">.</span><span class="n">List</span><span class="p">()</span>
+    <span class="n">devices</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="p">[...]</span></code></pre></figure>
+
+<p>Resimdeki List methodunu çalıştırın.Önünüze anlamsız sonuçlar gelecek.Öyleyse bu sonuçları anlamlı bir şekle sokmamız lazım.Linux da usb girdiğinde /devdizini altında sdb, sdc gibi sembolik dosyalar oluşur.İşte bunlar block_device lardır.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[...]</span>
+<span class="k">def</span> <span class="nf">getAllUnixDevices</span><span class="p">():</span>
+    <span class="n">busSession</span> <span class="o">=</span> <span class="n">dbus</span><span class="p">.</span><span class="n">SessionBus</span><span class="p">()</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">busSession</span><span class="p">.</span><span class="n">get_object</span><span class="p">(</span><span class="s">"org.gtk.vfs.UDisks2VolumeMonitor"</span><span class="p">,</span> <span class="s">"/org/gtk/Private/RemoteVolumeMonitor"</span><span class="p">)</span>
+    <span class="n">iface</span> <span class="o">=</span> <span class="n">dbus</span><span class="p">.</span><span class="n">Interface</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s">"org.gtk.Private.RemoteVolumeMonitor"</span><span class="p">)</span>
+    <span class="n">_listdevice_</span> <span class="o">=</span> <span class="n">iface</span><span class="p">.</span><span class="n">List</span><span class="p">()</span>
+    <span class="n">devices</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_listdevice_</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">dbus</span><span class="p">.</span><span class="n">Dictionary</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1">#FIXME How do is select USB devices better without third party?
+</span>                    
+                    <span class="n">path</span> <span class="o">=</span> <span class="n">deviceList</span><span class="p">(</span><span class="s">"/org/freedesktop/UDisks2/block_devices/"</span><span class="o">+</span><span class="n">j</span><span class="p">[</span><span class="s">"unix-device"</span><span class="p">].</span><span class="n">lstrip</span><span class="p">(</span><span class="s">"/dev/"</span><span class="p">))</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">findUSBDevices</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="p">[...]</span></code></pre></figure>
+
+<p>Gördüğünüz gibi bu anlamsız biçimi şekle sokmak için for döngüsü kullandım.Öncelikle _listdevice değişkeni bir liste veri tipidir.(Aslında öyle değil ama kafa karışıklığı olmasın) _liststore değişkeninin ilk değeri benim için daha iy. Çünkü sdb sdc gibi ifadeler o bölümde geçiyor. sonra o i ifadesini de for döngüsüne aldım.Çünkü _liststore[0] dan gelen i değişkenini de list gibi olduğu, ayrıca birden fazla device olduğu için böyle yaptım. gördüğünüz gibi önce deviceList fonksiyonunu, sonra deviceList fonksiyonundan aldığım değişkeni findUSBDevices değişkenine vererek o device ın usb olup olmadığını kontrol ettim.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="p">[...]</span>
+<span class="k">def</span> <span class="nf">getAllUnixDevices</span><span class="p">():</span>
+    <span class="n">busSession</span> <span class="o">=</span> <span class="n">dbus</span><span class="p">.</span><span class="n">SessionBus</span><span class="p">()</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">busSession</span><span class="p">.</span><span class="n">get_object</span><span class="p">(</span><span class="s">"org.gtk.vfs.UDisks2VolumeMonitor"</span><span class="p">,</span> <span class="s">"/org/gtk/Private/RemoteVolumeMonitor"</span><span class="p">)</span>
+    <span class="n">iface</span> <span class="o">=</span> <span class="n">dbus</span><span class="p">.</span><span class="n">Interface</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s">"org.gtk.Private.RemoteVolumeMonitor"</span><span class="p">)</span>
+    <span class="n">_listdevice_</span> <span class="o">=</span> <span class="n">iface</span><span class="p">.</span><span class="n">List</span><span class="p">()</span>
+    <span class="n">devices</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">_listdevice_</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">dbus</span><span class="p">.</span><span class="n">Dictionary</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1">#FIXME How do is select USB devices better without third party?
+</span>                    
+                    <span class="n">path</span> <span class="o">=</span> <span class="n">deviceList</span><span class="p">(</span><span class="s">"/org/freedesktop/UDisks2/block_devices/"</span><span class="o">+</span><span class="n">j</span><span class="p">[</span><span class="s">"unix-device"</span><span class="p">].</span><span class="n">lstrip</span><span class="p">(</span><span class="s">"/dev/"</span><span class="p">))</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">findUSBDevices</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                        <span class="n">size</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"Size"</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">12</span><span class="p">:</span>
+                            <span class="n">size</span> <span class="o">=</span> <span class="s">"%.0fTB"</span> <span class="o">%</span> <span class="nb">round</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">10</span><span class="o">**</span><span class="mi">12</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span><span class="p">:</span>
+                            <span class="n">size</span> <span class="o">=</span> <span class="s">"%.0fGB"</span> <span class="o">%</span> <span class="nb">round</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">:</span>
+                            <span class="n">size</span> <span class="o">=</span> <span class="s">"%.0fMB"</span> <span class="o">%</span> <span class="nb">round</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">:</span>
+                            <span class="n">size</span> <span class="o">=</span> <span class="s">"%.0fkB"</span> <span class="o">%</span> <span class="nb">round</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">size</span> <span class="o">=</span> <span class="s">"%.0fB"</span> <span class="o">%</span> <span class="nb">round</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+                        <span class="n">devices</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"Vendor"</span><span class="p">))</span><span class="o">+</span><span class="s">" "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"Model"</span><span class="p">))</span><span class="o">+</span><span class="s">" "</span><span class="o">+</span><span class="n">size</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="s">"unix-device"</span><span class="p">]),</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"Size"</span><span class="p">)])</span>
+                        
+                <span class="k">except</span> <span class="nb">KeyError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">devices</span>
+<span class="p">[...]</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></code></pre></figure>
+
+<p>doğruysa,yani o cihaz usb ise</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">size</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"Size"</span><span class="p">)</span></code></pre></figure>
+
+<p>kod parçasıyla o usb nin kaç gb, terabayt , mb olduğunu bulmak için bu kod parçasından değer alıyorum.Ama aldığım değer sadece usb nin kaç bayt olduğunu veriyor.Bizim onu anlamlı bir veriye dönüştürmemiz lazım. if bloğu içnde round ile değerleri yuvarlıyorum.Yoksa biraz anlamsız oluyor.</p>
+
+<p>En sonunda ise en başta oluşturduğum device adlı listeye bu verileri ekliyorum.append ile kattığımız verileri de bir inceleyelim.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"Vendor"</span><span class="p">))</span></code></pre></figure>
+
+<p>Cihazın vendorunu veriyor.Sandisk, Kingston vs.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"Model"</span><span class="p">))</span></code></pre></figure>
+
+<p>Burada o cihazın modelini bastırıyorum.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="s">"unix-device"</span><span class="p">])</span></code></pre></figure>
+
+<p>Bize usb için /dev/ dizini altında oluşturulmuş sembolik dosya patikasını verir.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Get</span><span class="p">(</span><span class="s">"org.freedesktop.UDisks2.Drive"</span><span class="p">,</span> <span class="s">"Size"</span><span class="p">)</span></code></pre></figure>
+
+<p>Bu da bize usb uzunluğunu bayt cinsinden verir</p>
+
+<p>Aslında bu scripti kendi projem için yazmıştım ama başkalarına yararlı olmak adına bu scripti anlatmak istedim.Kafanıza karışık gelen yerler olabilir.Sıkıntı yapmayın.Olmadı benle iletişime geçin.</p>
+
+<p>Sonraki yazılarda görüşmek üzere …</p>
+
+<p><a href="../">&lt;– geri</a></p>
+:ET

@@ -1,85 +1,68 @@
-# SITE CONFIGURATION
-baseurl: "/"
-url: "https://rohanchandra.github.io/"
+title: Cihat Altıparmak
+description:  <a style="color:yellow" href="https://cihataltiparmak.github.io/tr">Bu blogta yazılarımı yayınlıyorum.</a>\
+              <a style="color:green" href = "https://cihataltiparmak.github.io">I'm publishing my articles here.</a>
+author: "Cihat Kurtuluş Altıparmak"
+show_downloads: true
+google_analytics:
+# theme: jekyll-theme-hacker
 
-# THEME-SPECIFIC CONFIGURATION
-theme_settings:
-  # Meta
-  title: Cihat Altıparmak
-  avatar: assets/img/avatar.png
-  favicon: assets/favicon.ico
-  gravatar: assets/img/jarbay.jpg
-  description: "Cihat Altıparmak'ın Bloğu" # used by search engines
+url: "http://localhost"
 
-  # Header and footer text
-  header_text: >
-     <p>Kendi Anlatımlarımı Yaptığım Bir Blog</p>
+github:
+  username: MyNameIsCosmo
+  repository_url: https://github.com/MyNameIsCosmo/jekyll-theme-markdown-console
 
-     <p>Burası <code>hepimizin</code> mekanı</p>
-  header_text_feature_image:
-  footer_text: >
-   Copyright© <a href="https://github.com/Cihat Altiparmak">Cihat Altıparmak</a>
+# Links to include in menu navigation
+links:
+  - title: Home
+    url: /
+  - title: Maps
+    url: /maps
+  - title: About
+    url: /about
 
-  # Icons
-  rss: false
-  email_address: # Full email address, e.g. "sam@example.com"
-  behance:
-  bitbucket:
-  dribbble:
-  facebook:
-  flickr:
-  gitlab:
-  github: "CihatAltiparmak"
-  gitter:
-  google_plus:
-  instagram:
-  linkedin:  # Full URL
-  pinterest:
-  reddit:
-  soundcloud:
-  stack_exchange:  # Full URL
-  steam:
-  tumblr:
-  twitter:
-  wordpress:
-  youtube:
-
-  # Scripts
-  google_analytics: # Tracking ID, e.g. "UA-000000-01"
-  disqus_shortname:
-  katex: true # Enable if using math markup
-  search: false # Enable the search feature
-
-  # Localization strings
-  str_follow_on: "Follow on"
-  str_rss_follow: "Follow RSS feed"
-  str_email: "Email"
-  str_next_post: "Next post"
-  str_previous_post: "Previous post"
-  str_next_page: "Next"
-  str_previous_page: "Prev"
-  str_continue_reading: "Continue reading"
-  str_javascript_required_disqus: "Please enable JavaScript to view comments."
-  str_search_no_results: "No results found."
-
-  # Colours, typography and padding
-  # Open the "_sass > base" folder, and open "_variables.scss"
-  google_fonts: "Source+Sans+Pro:400,700,700italic,400italic"
-
-  # Post navigation
-  post_navigation: false
-
-# PAGINATION
-paginate: 5
-paginate_path: "blog/page:num"
-
-# BUILD SETTINGS
+# Build settings
 markdown: kramdown
 highlighter: rouge
-sass:
-  sass_dir: _sass
-  style: :compressed
-plugins: [jekyll-paginate]
-exclude:
-  - Gemfile
-  - Gemfile.lock
+permalink: /:title/
+
+# Markdown Processors
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
+  entity_output:  as_char
+  toc_levels:     1..6
+  smart_quotes:   lsquo,rsquo,ldquo,rdquo
+  hard_wrap:      false
+  footnote_nr:    1
+
+collections:
+  posts:
+    output:   true
+
+# html minify
+compress_html:
+  clippings: all
+  comments: all
+  endings: []
+  profile: false
+
+sitemap:
+  filename: "/sitemap.xml"
+  exclude:
+    - "/atom.xml"
+    - "/feed.xml"
+    - "/feed/index.xml"
+  include_posts:
+    - "/index.html"
+  change_frequency_name: "change_frequency"
+  priority_name: "priority"
+
+plugins: 
+  - jemoji
+  - jekyll-sitemap
+  - jekyll-mentions
+
+# exclude node related stuff
+exlucde: ['package.json', 'src', 'node_modules', 'template_post.em']

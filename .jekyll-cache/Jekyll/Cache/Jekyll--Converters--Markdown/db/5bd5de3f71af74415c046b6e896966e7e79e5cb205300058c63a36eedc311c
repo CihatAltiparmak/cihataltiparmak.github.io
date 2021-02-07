@@ -1,0 +1,21 @@
+I"�<h2 id="blog">Blog</h2>
+
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Articles</th>
+      <th style="text-align: left">Yayınlanma Zamanı</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><a href="/blog/2021-02-07-humanities-versus-modernism">Humanities Versus Modernism</a></td>
+      <td style="text-align: left">2021-02-07</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+:ET
