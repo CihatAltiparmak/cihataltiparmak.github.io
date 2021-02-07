@@ -2,7 +2,7 @@
 layout: default
 ---
 
-## / [Blog](./blog) 
+## / [Blog](/tr/blog) 
 ## / [Github](https://github.com/CihatAltiparmak)
 ![](../pp.jpg)
 
