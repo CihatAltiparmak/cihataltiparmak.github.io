@@ -6,7 +6,7 @@ show_downloads: true
 google_analytics:
 # theme: jekyll-theme-hacker
 
-url: "http://localhost"
+url: "cihataltiparmak.github.io"
 
 github:
   username: MyNameIsCosmo
