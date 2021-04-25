@@ -22,8 +22,12 @@ E, graftaki düğümlerin birbiriyle yaptığı bağların kümesi [Edge]
 ![](../resimler/cizge_kuramina_giris/2.jpeg)
 
 Bu arada yukarıdaki resimdeki tanımları da açıklamadan geçemeyeceğim.
-$e = (v_{1}, v_{2}) \1n E$
-*$v_{1}$ and $v_{2}$ are adjacent*
+$$
+\begin{align*}
+& e= (v_1, v_2) \1n E
+\end{align*}
+$$
+**$v_{1}$ and $v_{2}$ are adjacent**
 
 Gördüğünüz üzere, V kümesinde a, b, c, d, e nodeları var. E deki elemanlara bakalım
 (a, c) a ile c arasında bir bağlantı vardır. (*$v_{1}$ and $v_{2}$ are adjacent* tanımda bu cümle geçmeseydi sadece a dan c ye bir bağlantı vardır diyebilirdik. c den a ya bir bağlantı vardır diyemezdik.)
