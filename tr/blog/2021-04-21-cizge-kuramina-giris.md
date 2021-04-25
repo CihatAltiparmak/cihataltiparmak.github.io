@@ -24,13 +24,13 @@ E, graftaki düğümlerin birbiriyle yaptığı bağların kümesi [Edge]
 Bu arada yukarıdaki resimdeki tanımları da açıklamadan geçemeyeceğim.
 $$
 \begin{align*}
-& e= (v_1, v_2) \1n E
+& e= (v_1, v_2) \in E
 \end{align*}
 $$
-**$v_{1}$ and $v_{2}$ are adjacent**
+**$$\begin{align*}v_1\end{align*}$$ and $$\begin{align*}v_2\end{align*}$$ are adjacent**
 
 Gördüğünüz üzere, V kümesinde a, b, c, d, e nodeları var. E deki elemanlara bakalım
-(a, c) a ile c arasında bir bağlantı vardır. (*$v_{1}$ and $v_{2}$ are adjacent* tanımda bu cümle geçmeseydi sadece a dan c ye bir bağlantı vardır diyebilirdik. c den a ya bir bağlantı vardır diyemezdik.)
+(a, c) a ile c arasında bir bağlantı vardır. (*$$v_1$$ and $$v_2$$ are adjacent* tanımda bu cümle geçmeseydi sadece a dan c ye bir bağlantı vardır diyebilirdik. c den a ya bir bağlantı vardır diyemezdik.)
 (a, b) a ile b arasında bir bağlantı vardır.
 (c, b) c ile b arasında bir bağlantı vardır.
 (b, e) b ile e arasında bir bağlantı vardır.
@@ -41,11 +41,16 @@ Gördüğünüz üzere, V kümesinde a, b, c, d, e nodeları var. E deki elemanl
 ![](../resimler/cizge_kuramina_giris/3.jpeg)
 
 Bu resmi açıklayalım.
-$a=(v_{1} , v_{2})$
-$v_{1}$ : origin node of a
-$v_{2}$ : terminating node of a
+$$
+\begin{align*}
+& a=(v_1 , v_2)
+\end{align*}
+$$
 
-Yani sadece $v_{1}$ düğümünden $v_{2}$ düğümüne bir bağlantı vardır diyebiliriz. $v_{2}$ den $v_{1}$ e bir bağlantı olduğunu söyleyemeyiz.
+$$v_1$$ : origin node of a
+$$v_2$$ : terminating node of a
+
+Yani sadece $$v_1$$ düğümünden $$v_2$$ düğümüne bir bağlantı vardır diyebiliriz. $$v_2$$ den $$v_1$$ e bir bağlantı olduğunu söyleyemeyiz.
 
 Aşağıda örnek bir Yönelimli Graf var.
 
