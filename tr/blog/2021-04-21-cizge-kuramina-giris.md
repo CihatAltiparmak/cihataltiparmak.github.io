@@ -68,7 +68,9 @@ Aşağıda örnek bir Yönelimli Graf var.
 $$
 \begin{align*}
 & D = (V, A)
+
 & V = {a, b, c, d}
+
 & A = {(a, b), (b, a), (a, c), (c, b), (a, d)}
 \end{align*}
 $$
@@ -137,6 +139,6 @@ yukarıdaki resim için konuşalım.
 
 $$A$$ resimde gösterdiğimiz komşuluk matrixidir.
 
-$$A_1,_2 = 1$$olduğu için $$v_1$$ den $$v_2$$ ye bir edge vardır. Ama $$A_2, _1 = 0$$  olduğu için $$v_2$$ den $$v_1$$ edge yoktur. Yani $$v_1$$ den $$v_2$$ ye gidilebilir ama $$v_2$$ den $$v_1$$ e gidilemez.
+$$A_1,_2 = 1$$ olduğu için $$v_1$$ den $$v_2$$ ye bir edge vardır. Ama $$A_2, _1 = 0$$  olduğu için $$v_2$$ den $$v_1$$ edge yoktur. Yani $$v_1$$ den $$v_2$$ ye gidilebilir ama $$v_2$$ den $$v_1$$ e gidilemez.
 
 ![](../resimler/cizge_kuramina_giris/9.jpeg)
