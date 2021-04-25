@@ -110,7 +110,7 @@ olduğu için $v_{1}$ den $v_{2}$ ye bir edge vardır. Ama $A_{2}{1} = 0$  oldu�
 
 
 $$
-\begin{aligned}
+\begin{displaymath}
   & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
   = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
   & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
@@ -123,5 +123,5 @@ $$
       \vdots \\
       y_n
     \end{array} \right)
-\end{aligned}
+\end{displaymath}
 $$
