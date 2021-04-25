@@ -67,11 +67,11 @@ Aşağıda örnek bir Yönelimli Graf var.
 
 $$
 \begin{align*}
-& D = (V, A)
+& D = (V, A) \\
 
-& V = {a, b, c, d}
+& V = {a, b, c, d}\\
 
-& A = {(a, b), (b, a), (a, c), (c, b), (a, d)}
+& A = {(a, b), (b, a), (a, c), (c, b), (a, d)} \\
 \end{align*}
 $$
 
