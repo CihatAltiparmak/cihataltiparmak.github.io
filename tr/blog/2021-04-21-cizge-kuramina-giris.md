@@ -8,7 +8,7 @@ giden en kısa yolu bulmak vs. için kullanılır.
 
 Şimdi bu graf, matematik dilinde nasıl gösterilir ona bakalım.
 
-*G, Yönelimsiz Graf(Undirected Graph) olmak üzere*
+*G, Yönelimsiz Graf(Undirected Graph) olmak üzere;*
 
 G = (V, E)
 
@@ -28,11 +28,7 @@ E, graftaki düğümlerin birbiriyle yaptığı bağların kümesi [Edge]
 
 Bu arada yukarıdaki resimdeki tanımları da açıklamadan geçemeyeceğim.
 
-$$
-\begin{align*}
-& e= (v_1, v_2) \in E
-\end{align*}
-$$
+$$e= (v_1, v_2) \in E$$
 
 **$$\begin{align*}v_1\end{align*}$$ and $$\begin{align*}v_2\end{align*}$$ are adjacent**
 
@@ -71,9 +67,9 @@ Aşağıda örnek bir Yönelimli Graf var.
 
 $$
 \begin{align*}
-D = (V, A)
-V = {a, b, c, d}
-A = {(a, b), (b, a), (a, c), (c, b), (a, d)}
+& D = (V, A)
+& V = {a, b, c, d}
+& A = {(a, b), (b, a), (a, c), (c, b), (a, d)}
 \end{align*}
 $$
 
@@ -131,14 +127,16 @@ multigraph: plain graph olmayan grafa denir.
 
 yukarıdaki resim için konuşalım.
 
-$$A_1,_2 = 1$$
+$$A$$ resimde gösterdiğimiz komşuluk matrixidir.
 
-olduğu için $$v_1$$ den $$v_2$$ ye bir edge vardır. $$A_2,_1 = 1$$  olduğu için $$v_2$$ den $$v_1$$ ye de edge vardır. Yani hem $$v_1$$ den $$v_2$$ ye gidilebilir hem de $$v_2$$ den $$v_1$$ e gidilebilir.
+$$A_1,_2 = 1$$ olduğu için $$v_1$$ den $$v_2$$ ye bir edge vardır. $$A_2,_1 = 1$$  olduğu için $$v_2$$ den $$v_1$$ ye de edge vardır. Yani hem $$v_1$$ den $$v_2$$ ye gidilebilir hem de $$v_2$$ den $$v_1$$ e gidilebilir.
 
 ![](../resimler/cizge_kuramina_giris/8.jpeg)
 
 yukarıdaki resim için konuşalım.
-$$A_1,_2 = 1$$
-olduğu için $$v_1$$ den $$v_2$$ ye bir edge vardır. Ama $$A_2, _1 = 0$$  olduğu için $$v_2$$ den $$v_1$$ edge yoktur. Yani $$v_1$$ den $$v_2$$ ye gidilebilir ama $$v_2$$ den $$v_1$$ e gidilemez.
+
+$$A$$ resimde gösterdiğimiz komşuluk matrixidir.
+
+$$A_1,_2 = 1$$olduğu için $$v_1$$ den $$v_2$$ ye bir edge vardır. Ama $$A_2, _1 = 0$$  olduğu için $$v_2$$ den $$v_1$$ edge yoktur. Yani $$v_1$$ den $$v_2$$ ye gidilebilir ama $$v_2$$ den $$v_1$$ e gidilemez.
 
 ![](../resimler/cizge_kuramina_giris/9.jpeg)
