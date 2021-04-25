@@ -1,6 +1,4 @@
 Merhaba arkadaşlar, bu yazımda sizlerle graf teorisi hakkında konuşacağım.
-İlk olarak graf teorisi ne işe yarar bunu konuşalım. Graf teorisi, bir şehirden giden başka bir şehire
-giden en kısa yolu bulmak vs. için kullanılır.
 
 Şimdi sizlerle örnek bir grafa göz atalım.
 
