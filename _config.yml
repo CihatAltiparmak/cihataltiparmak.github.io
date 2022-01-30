@@ -1,12 +1,12 @@
 title: Cihat Altıparmak
-description:  <a style="color:yellow" href="https://itu-itis21-altiparmak20.github.io/tr">Bu blogta yazılarımı yayınlıyorum.</a>\
-              <a style="color:green" href = "https://itu-itis21-altiparmak20.github.io">I'm publishing my articles here.</a>
+description:  <a style="color:yellow" href="https://cihataltiparmak.github.io/tr">Bu blogta yazılarımı yayınlıyorum.</a>\
+              <a style="color:green" href = "https://cihataltiparmak.github.io">I'm publishing my articles here.</a>
 author: "Cihat Kurtuluş Altıparmak"
 show_downloads: true
 google_analytics:
 # theme: jekyll-theme-hacker
 
-url: "itu-itis21-altiparmak20.github.io"
+url: "cihataltiparmak.github.io"
 
 github:
   username: MyNameIsCosmo
